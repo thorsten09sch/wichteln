@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wichteln – Testversion</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:#f3f5f1;font:17px system-ui,-apple-system,sans-serif;color:#23382f}
+main{width:min(92vw,460px);background:white;border-radius:24px;padding:32px 24px;text-align:center;box-shadow:0 12px 35px #203d2818}
+h1{margin:8px 0 12px;font-size:30px}p{line-height:1.5}button{cursor:pointer;border:0;border-radius:14px;padding:13px 18px;font:inherit;background:#23664c;color:white}
+#gift{font-size:92px;background:transparent;padding:12px;transition:transform .2s}#gift:active{transform:scale(.88)}
+#result{font-size:27px;font-weight:750;color:#23664c;min-height:42px;margin-top:14px}
+a{display:block;padding:12px;margin:8px 0;border-radius:12px;background:#e8f2eb;color:#21583f;text-decoration:none;font-weight:600}
+small{display:block;margin-top:20px;color:#777;line-height:1.5}
+</style></head><body><main><div style="font-size:34px">🎄</div><h1>Unser Wichteln</h1>
+<div id="app"></div>
+<small>Nur eine öffentliche Funktionsdemo. Die Zuordnungen sind nicht geheim gespeichert. Für echtes Wichteln benötigen wir später eine geschützte Datenbank.</small>
+</main>
+<script>
+(function(){
+const names=["Heike","Uwe","Thorsten","Lisa","Jessica","Robert"];
+// Demo-Zuordnung: jede Person einmal, niemand sich selbst oder Partner.
+const drawn={Heike:"Lisa",Uwe:"Jessica",Thorsten:"Robert",Lisa:"Uwe",Jessica:"Thorsten",Robert:"Heike"};
+const params=new URLSearchParams(location.search);
+const who=params.get("person");
+const app=document.getElementById("app");
+if(!names.includes(who)){
+  app.innerHTML='<p>Wähle für den Probelauf eine persönliche Testseite:</p>'+names.map(n=>'<a href="?person='+encodeURIComponent(n)+'">'+n+'</a>').join('');
+  return;
+}
+app.innerHTML='<p>Hallo <strong>'+who+'</strong>!<br>Tippe auf das Geschenk, um deinen Wichtelnamen zu sehen.</p><button id="gift" aria-label="Geschenk öffnen">🎁</button><div id="result" aria-live="polite"></div><p><a href="./">Zurück zur Testübersicht</a></p>';
+document.getElementById("gift").addEventListener("click",function(){
+  this.textContent="🎉";
+  document.getElementById("result").textContent="Du beschenkst: "+drawn[who];
+});
+})();
+</script></body></html>
