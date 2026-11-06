@@ -28,7 +28,50 @@ main[hidden],section[hidden],div[hidden],p[hidden],button[hidden]{display:none!i
 .code-list{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
 @media(min-width:690px){.stage{height:min(92vh,950px);min-height:650px}}
 @media(max-height:690px){.stage{min-height:480px}.trigger{top:75%;height:48px}.stage-note{font-size:10px}}
-@media print{body{background:white;color:black}.stage,.admin>*:not(#print-area){display:none!important}.admin{background:white;padding:0;max-width:none}#print-area{display:block!important}.code-list{justify-content:space-around}.code-card{width:45%;margin:4px} .code-card svg{width:160px}}
+
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  .stage,
+  #participant-access,
+  #admin > :not(#logged),
+  #logged > :not(#print-area),
+  #print-area button {
+    display: none !important;
+  }
+
+  #admin,
+  #logged,
+  #print-area {
+    display: block !important;
+    background: white !important;
+    color: black !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: none !important;
+  }
+
+  .code-list {
+    display: flex !important;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+  .code-card {
+    width: 45%;
+    margin: 4px;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .code-card svg {
+    width: 160px;
+  }
+}
+
 </style></head><body>
 <main class="stage" id="stage">
   <button class="trigger" id="open" type="button">Wichtelperson aufdecken</button>
